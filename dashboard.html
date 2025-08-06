@@ -1,46 +1,60 @@
-dashboard.html                                            <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Panel - Estudiantes</title>
+  <title>Panel - Mi Clase en la Nube</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="styles.css" />
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
-  <div class="container">
+  <header class="header">
+    <h1 class="header-title">Panel de Estudiantes</h1>
+    <button onclick="cerrarSesion()" class="cerrar-btn">Cerrar sesión</button>
+  </header>
 
-    <h1>Panel de Estudiantes</h1>
-<button onclick="cerrarSesion()" class="cerrar-btn">Cerrar sesión</button>
+  <main class="container">
+    <section class="card">
+      <h2 class="card-title">Registrar estudiante</h2>
+      <div class="form-group">
+        <label for="nombre" class="visually-hidden">Nombre del estudiante</label>
+        <input type="text" id="nombre" placeholder="Nombre del estudiante" class="input-field" />
+      </div>
+      <div class="form-group">
+        <label for="correo" class="visually-hidden">Correo</label>
+        <input type="email" id="correo" placeholder="Correo" class="input-field" />
+      </div>
+      <div class="form-group">
+        <label for="clase" class="visually-hidden">Clase</label>
+        <input type="text" id="clase" placeholder="Clase" class="input-field" />
+      </div>
+      <button onclick="agregarEstudiante()" class="btn btn-primary">Agregar</button>
+    </section>
+
+    <section class="card">
+      <h2 class="card-title">Lista de estudiantes</h2>
+      <ul id="lista-estudiantes" class="list"></ul>
+    </section>
+
+    <section class="card">
+      <h2 class="card-title">Subir archivo</h2>
+      <div class="form-group">
+        <label for="estudiante" class="label">Selecciona un estudiante:</label>
+        <select id="estudiante" class="select-field"></select>
+      </div>
+      <div class="form-group">
+        <label for="archivo" class="visually-hidden">Seleccionar archivo</label>
+        <input type="file" id="archivo" class="file-input" />
+      </div>
+      <button onclick="subirArchivo()" class="btn btn-primary">Subir</button>
+    </section>
+
+    <section class="card">
+      <h2 class="card-title">Archivos subidos</h2>
+      <ul id="lista-archivos" class="list"></ul>
+    </section>
+  </main>
   
-    <section class="card">
-      <h2>Registrar estudiante</h2>
-      <input type="text" id="nombre" placeholder="Nombre del estudiante" />
-      <input type="email" id="correo" placeholder="Correo" />
-      <input type="text" id="clase" placeholder="Clase" />
-      <button onclick="agregarEstudiante()">Agregar</button>
-    </section>
-
-   
-    <section class="card">
-      <h2>Lista de estudiantes</h2>
-      <ul id="lista-estudiantes"></ul>
-    </section>
-
-    <section class="card">
-      <h2>Subir archivo</h2>
-      <label for="estudiante">Selecciona un estudiante:</label>
-      <select id="estudiante"></select><br /><br />
-
-      <input type="file" id="archivo" />
-      <button onclick="subirArchivo()">Subir</button>
-    </section>
-
-    <section class="card">
-      <h2>Archivos subidos</h2>
-      <ul id="lista-archivos"></ul>
-    </section>
-
-    </div>
   <script src="js/dashboard.js"></script>
 </body>
 </html>

@@ -3,29 +3,40 @@
 <head>
   <meta charset="UTF-8" />
   <title>Mi Clase en la Nube - Login</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="styles.css" />
- </head>
+</head>
 <body>
-  <h1>Bienvenida a Mi Clase en la Nube</h1>
+  <main class="auth-main">
+    <h1 class="main-title">Bienvenida a Mi Clase en la Nube</h1>
 
-  <div id="auth-container">
+    <section id="auth-container" class="auth-card">
+      <div id="login-form">
+        <h2 class="card-title">Iniciar Sesión</h2>
+        <div class="form-group">
+          <input type="email" id="email" placeholder="Correo" class="input-field" />
+        </div>
+        <div class="form-group">
+          <input type="password" id="password" placeholder="Contraseña" class="input-field" />
+        </div>
+        <button onclick="login()" class="btn btn-primary">Entrar</button>
+        <p class="form-link">¿No tienes cuenta? <a href="#" onclick="toggleForms()">Regístrate aquí</a></p>
+      </div>
+
+      <div id="register-form" style="display: none;">
+        <h2 class="card-title">Registrarse</h2>
+        <div class="form-group">
+          <input type="email" id="reg-email" placeholder="Correo" class="input-field" />
+        </div>
+        <div class="form-group">
+          <input type="password" id="reg-password" placeholder="Contraseña" class="input-field" />
+        </div>
+        <button onclick="register()" class="btn btn-secondary">Crear cuenta</button>
+        <p class="form-link">¿Ya tienes cuenta? <a href="#" onclick="toggleForms()">Inicia sesión aquí</a></p>
+      </div>
+    </section>
+  </main>
   
-    <div id="login-form">
-      <h2>Iniciar Sesión</h2>
-      <input type="email" id="email" placeholder="Correo" />
-      <input type="password" id="password" placeholder="Contraseña" />
-      <button onclick="login()">Entrar</button>
-      <p>¿No tienes cuenta? <a href="#" onclick="toggleForms()">Regístrate aquí</a></p>
-    </div>
-
-    <div id="register-form" style="display:none;">
-      <h2>Registrarse</h2>
-      <input type="email" id="reg-email" placeholder="Correo" />
-      <input type="password" id="reg-password" placeholder="Contraseña" />
-      <button onclick="register()">Crear cuenta</button>
-      <p>¿Ya tienes cuenta? <a href="#" onclick="toggleForms()">Inicia sesión aquí</a></p>
-    </div>
-  </div>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="js/auth.js"></script>
 </body>
