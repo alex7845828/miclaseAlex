@@ -40,7 +40,7 @@ async function login() {
   if (error) {
     alert("Error: " + error.message);
   } else {
-    alert("Sesión iniciada.");
+    alert("Sesión iniciada Con exito.");
     localStorage.setItem("token", data.session.access_token);
 
      window.location.href = "dashboard.html"; //Registro Estudiantes

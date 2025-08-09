@@ -184,7 +184,7 @@ async function cerrarSesion() {
         if (error) throw error;
 
         localStorage.removeItem("token");
-        alert("Sesión cerrada correctamente.");
+        alert("Sesión cerrada correctamente continue.");
         window.location.href = "index.html";
     } catch (error) {
         alert("Error al cerrar sesión: " + error.message);
