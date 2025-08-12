@@ -18,6 +18,9 @@ document.addEventListener('DOMContentLoaded', () => {
 // FUNCIONES DE ESTUDIANTES
 // ====================
 
+// Variable para almacenar el ID del estudiante que se está editando.
+let idEstudianteAEditar = null;
+
 async function agregarEstudiante() {
     const nombre = document.getElementById("nombre").value;
     const correo = document.getElementById("correo").value;
@@ -35,20 +38,26 @@ async function agregarEstudiante() {
             alert("No estás autenticado.");
             return;
         }
+        
+        // Si hay un idEstudianteAEditar, se actualiza el registro en lugar de crearlo
+        if (idEstudianteAEditar) {
+            await actualizarEstudiante(idEstudianteAEditar, { nombre, correo, clase });
+        } else {
+            const { error } = await client.from("estudiantes").insert({
+                nombre,
+                correo,
+                clase,
+                user_id: user.id,
+            });
 
-        const { error } = await client.from("estudiantes").insert({
-            nombre,
-            correo,
-            clase,
-            user_id: user.id,
-        });
+            if (error) throw error;
+            alert("Estudiante agregado correctamente.");
+        }
 
-        if (error) throw error;
-
-        alert("Estudiante agregado correctamente.");
+        limpiarCampos();
         cargarEstudiantes();
     } catch (error) {
-        alert("Error al agregar estudiante: " + error.message);
+        alert("Error al guardar estudiante: " + error.message);
     }
 }
 
@@ -71,12 +80,69 @@ async function cargarEstudiantes() {
         
         data.forEach((est) => {
             const item = document.createElement("li");
-            item.textContent = `${est.nombre} (${est.clase})`;
+            item.innerHTML = `
+                <span>${est.nombre} (${est.clase})</span>
+                <div class="list-actions">
+                    <button class="btn-edit" onclick="prepararEdicion('${est.id}', '${est.nombre}', '${est.correo}', '${est.clase}')">Editar</button>
+                    <button class="btn-delete" onclick="eliminarEstudiante('${est.id}')">Eliminar</button>
+                </div>
+            `;
             lista.appendChild(item);
         });
     } catch (error) {
         alert("Error al cargar estudiantes: " + error.message);
     }
+}
+
+async function eliminarEstudiante(id) {
+    if (!confirm("¿Estás seguro de que deseas eliminar este estudiante?")) {
+        return;
+    }
+
+    try {
+        const { error } = await client.from("estudiantes").delete().eq("id", id);
+        
+        if (error) throw error;
+
+        alert("Estudiante eliminado correctamente.");
+        cargarEstudiantes();
+    } catch (error) {
+        alert("Error al eliminar estudiante: " + error.message);
+    }
+}
+
+function prepararEdicion(id, nombre, correo, clase) {
+    idEstudianteAEditar = id;
+    document.getElementById("nombre").value = nombre;
+    document.getElementById("correo").value = correo;
+    document.getElementById("clase").value = clase;
+    
+    // Cambiar el texto del botón para indicar que se va a actualizar
+    document.querySelector('.btn-primary').textContent = 'Actualizar';
+}
+
+async function actualizarEstudiante(id, nuevosDatos) {
+    try {
+        const { error } = await client
+            .from('estudiantes')
+            .update(nuevosDatos)
+            .eq('id', id);
+
+        if (error) throw error;
+
+        alert("Estudiante actualizado correctamente.");
+        limpiarCampos();
+    } catch (error) {
+        alert("Error al actualizar estudiante: " + error.message);
+    }
+}
+
+function limpiarCampos() {
+    idEstudianteAEditar = null;
+    document.getElementById("nombre").value = "";
+    document.getElementById("correo").value = "";
+    document.getElementById("clase").value = "";
+    document.querySelector('.btn-primary').textContent = 'Agregar';
 }
 
 // ====================
@@ -184,7 +250,7 @@ async function cerrarSesion() {
         if (error) throw error;
 
         localStorage.removeItem("token");
-        alert("Sesión cerrada correctamente continue.");
+        alert("Sesión cerrada correctamente.");
         window.location.href = "index.html";
     } catch (error) {
         alert("Error al cerrar sesión: " + error.message);
