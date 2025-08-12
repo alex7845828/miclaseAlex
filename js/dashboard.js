@@ -80,6 +80,7 @@ async function agregarEstudiante() {
             estudianteIdEnEdicion = null;
             document.querySelector('.btn-primary').textContent = 'Agregar';
             limpiarCampos();
+            // Esta línea recarga la lista después de la edición
             listarEstudiantes();
         }
     } else {
@@ -125,6 +126,7 @@ async function eliminarEstudiante(id) {
         alert('Error al eliminar estudiante: ' + error.message);
     } else {
         alert('Estudiante eliminado con éxito.');
+        // Esta línea recarga la lista después de la eliminación
         listarEstudiantes();
     }
 }
