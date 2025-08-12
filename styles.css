@@ -46,6 +46,7 @@ h1 {
  * ESTILOS ESPECÍFICOS PARA EL DASHBOARD
  * ----------------------------------------------------
  */
+
 .header {
   display: flex;
   justify-content: space-between;
@@ -231,6 +232,7 @@ h1 {
  * ESTILOS ESPECÍFICOS PARA LA PÁGINA DE AUTENTICACIÓN
  * ----------------------------------------------------
  */
+
 .auth-main {
   /* Asegura que el contenido se centre */
   width: 100%;
