@@ -80,8 +80,7 @@ async function agregarEstudiante() {
             estudianteIdEnEdicion = null;
             document.querySelector('.btn-primary').textContent = 'Agregar';
             limpiarCampos();
-            // Llama a la función para recargar la lista
-            listarEstudiantes(); 
+            listarEstudiantes();
         }
     } else {
         // Lógica para agregar un nuevo estudiante
