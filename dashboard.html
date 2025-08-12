@@ -14,8 +14,9 @@
     </header>
 
     <main class="container">
-        <section class="card">
-            <h2 class="card-title">Registrar estudiante</h2>
+        <section class="card students-section">
+            <h2 class="card-title">Gestión de estudiantes</h2>
+            
             <div class="form-group">
                 <label for="nombre" class="visually-hidden">Nombre del estudiante</label>
                 <input type="text" id="nombre" placeholder="Nombre del estudiante" class="input-field" />
@@ -28,19 +29,19 @@
                 <label for="clase" class="visually-hidden">Clase</label>
                 <input type="text" id="clase" placeholder="Clase" class="input-field" />
             </div>
+            
             <div class="button-group">
                 <button onclick="agregarEstudiante()" class="btn btn-primary">Agregar</button>
                 <button onclick="limpiarCampos()" class="btn btn-secondary">Limpiar</button>
             </div>
-        </section>
-
-        <section class="card">
-            <h2 class="card-title">Lista de estudiantes</h2>
+            
+            <h3 class="list-title">Lista de estudiantes</h3>
             <ul id="lista-estudiantes" class="list"></ul>
         </section>
 
-        <section class="card">
-            <h2 class="card-title">Subir archivo</h2>
+        <section class="card files-section">
+            <h2 class="card-title">Gestión de archivos</h2>
+            
             <div class="form-group">
                 <label for="estudiante" class="label">Selecciona un estudiante:</label>
                 <select id="estudiante" class="select-field"></select>
@@ -50,10 +51,8 @@
                 <input type="file" id="archivo" class="file-input" />
             </div>
             <button onclick="subirArchivo()" class="btn btn-primary">Subir</button>
-        </section>
-
-        <section class="card">
-            <h2 class="card-title">Archivos subidos</h2>
+            
+            <h3 class="list-title">Archivos subidos</h3>
             <ul id="lista-archivos" class="list"></ul>
         </section>
     </main>
